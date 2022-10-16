@@ -1,0 +1,35 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+ #yts_fab {
+    /* position: -webkit-sticky; */
+    position: fixed;
+    display: flex;
+    align-items: center;
+    bottom: 15px;
+    cursor: pointer;
+    z-index: 9999;
+ }
+
+ #yts_fab_text {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 10%;
+    background-color: rgb(37, 212, 102);
+    color: white;
+    transition: opacity;
+    opacity: 0;
+    transition-duration: 100ms;
+ }
+
+ .ytsfab-right {
+   right: 15px;
+   flex-direction: row
+ }
+
+ .ytsfab-left {
+   left: 15px;
+   flex-direction: row-reverse;
+ }
