@@ -2,3 +2,8 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+ #image-preview {
+    max-width: 200px;
+    max-height: 200px;
+ }

@@ -43,13 +43,9 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload plugin folder to the `/wp-content/plugins/` directory. 
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-OR
-1. Select Plugins > Add New > Upload Plugin.
-2. Select compressed plugin file then click Install Now.
-2. Activate the plugin through the 'Plugins' menu in WordPress
-
+1. Upload `yts-fab.php` to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
 
 == Frequently Asked Questions ==
 

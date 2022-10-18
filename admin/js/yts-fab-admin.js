@@ -1,32 +1,75 @@
-(function( $ ) {
-	'use strict';
+(function($) {
+    $(document).ready(function() {
+        const wpOpenGallery = function(o, callback) {
+            const options = (typeof o === 'object') ? o : {};
 
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+            // Predefined settings
+            const defaultOptions = {
+                title: 'Select Media',
+                fileType: 'image',
+                multiple: false,
+                currentValue: '',
+            };
 
-})( jQuery );
+            const opt = { ...defaultOptions, ...options };
+
+            let image_frame;
+
+            if(image_frame){
+                image_frame.open();
+            }
+
+            // Define image_frame as wp.media object
+            image_frame = wp.media({
+                title: opt.title,
+                multiple : opt.multiple,
+                library : {
+                    type : opt.fileType,
+                }
+            });
+
+            image_frame.on('open',function() {
+                // On open, get the id from the hidden input
+                // and select the appropiate images in the media manager
+                const selection =  image_frame.state().get('selection');
+                const ids = opt.currentValue.split(',');
+
+                ids.forEach(function(id) {
+                    const attachment = wp.media.attachment(id);
+                    attachment.fetch();
+                    selection.add( attachment ? [ attachment ] : [] );
+                });
+            });
+
+            image_frame.on('close',function() {
+                // On close, get selections and save to the hidden input
+                // plus other AJAX stuff to refresh the image preview
+                const selection =  image_frame.state().get('selection');
+                const files = [];
+
+                selection.each(function(attachment) {
+                    files.push({
+                        id: attachment.attributes.id,
+                        filename: attachment.attributes.filename,
+                        url: attachment.attributes.url,
+                        type: attachment.attributes.type,
+                        subtype: attachment.attributes.subtype,
+                        sizes: attachment.attributes.sizes,
+                    });
+                });
+				
+				document.getElementById('media_selector_3').value = files[0]['id'];
+                document.getElementById('image-preview').src = files[0]['url'];
+				console.log(files[0]['url'])
+
+                callback(files);
+            });
+
+            image_frame.open();
+        }
+		jQuery('#upload_image_button').on('click', function( event ){  wpOpenGallery(null, function(data) {
+			console.log(data);
+		}); });
+    })
+}(jQuery));
+

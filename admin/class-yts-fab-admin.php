@@ -95,9 +95,16 @@ class Yts_Fab_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/yts-fab-admin.js', array( 'jquery' ), $this->version, false );
-
+		wp_register_script(
+			'yts-fab-admin-script',
+			plugin_dir_url( __FILE__ ) . 'js/yts-fab-admin.js',
+			array( 'jquery' ),
+			'1.0  ',
+			false
+		);
+		$saved_attachment_post_id = get_option( 'media_selector_attachment_id', 0 );
+		wp_localize_script( 'yts-fab-admin-script', 'scriptParams', array('saved_attachment_post_id' => $saved_attachment_post_id) );
+		wp_enqueue_script( 'yts-fab-admin-script' );
 	}
 
 	/**
@@ -130,6 +137,7 @@ class Yts_Fab_Admin {
 					settings_fields( 'yts_fab_option_group' );
 					do_settings_sections( 'yts-fab-admin' );
 					submit_button();
+					do_settings_sections( 'yts_fab_advanced_setting_section' );
 				?>
 			</form>
 		</div>
@@ -149,9 +157,16 @@ class Yts_Fab_Admin {
 			'yts-fab-admin' // page
 		);
 
+		add_settings_section(
+			'yts_fab_advanced_setting_section', // id
+			'Advanced settings', // title
+			array( $this, 'yts_fab_section_info' ), // callback
+			'yts-fab-admin' // page
+		);
+
 		add_settings_field(
 			'yaz_0', // id
-			'Yazı', // title
+			'Text', // title
 			array( $this, 'yaz_0_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
@@ -159,7 +174,7 @@ class Yts_Fab_Admin {
 
 		add_settings_field(
 			'konum_1', // id
-			'Konum', // title
+			'Location', // title
 			array( $this, 'konum_1_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
@@ -171,6 +186,40 @@ class Yts_Fab_Admin {
 			array( $this, 'link_2_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
+		);
+
+		add_settings_field(
+			'media_selector_3', // id
+			'Image', // title
+			array( $this, 'media_selector_3_callback' ), // callback
+			'yts-fab-admin', // page
+			'yts_fab_setting_section' // section
+		);
+
+		add_settings_field(
+			'width_4', // id
+			'Width', // title
+			array( $this, 'width_4_callback' ), // callback
+			'yts-fab-admin', // page
+			'yts_fab_setting_section' // section
+		);
+
+		add_settings_field(
+			'height_5', // id
+			'Height', // title
+			array( $this, 'height_5_callback' ), // callback
+			'yts-fab-admin', // page
+			'yts_fab_setting_section' // section
+		);
+
+		//Advanced Settings
+
+		add_settings_field(
+			'border_radius_0',
+			'Border radius',
+			array( $this, 'border_radius_0_callback'),
+			'yts-fab-admin',
+			'yts_fab_advanced_setting_section'
 		);
 	}
 
@@ -188,6 +237,22 @@ class Yts_Fab_Admin {
 			$sanitary_values['link_2'] = esc_textarea( $input['link_2'] );
 		}
 
+		if ( isset( $input['media_selector_3'] ) ) {
+			$sanitary_values['media_selector_3'] = esc_textarea( $input['media_selector_3'] );
+		}
+
+		if ( isset( $input['width_4'] ) ) {
+			$sanitary_values['width_4'] = esc_textarea( $input['width_4'] );
+		}
+
+		if ( isset( $input['height_5'] ) ) {
+			$sanitary_values['height_5'] = esc_textarea( $input['height_5'] );
+		}
+
+		if ( isset( $input['border_radius_0'] ) ) {
+			$sanitary_values['border_radius_0'] = esc_textarea( $input['border_radius_0'] );
+		}
+
 		return $sanitary_values;
 	}
 
@@ -198,16 +263,16 @@ class Yts_Fab_Admin {
 	public function yaz_0_callback() {
 		printf(
 			'<textarea class="large-text" rows="5" name="yts_fab_option_name[yaz_0]" id="yaz_0">%s</textarea>',
-			isset( $this->yts_fab_options['yaz_0'] ) ? esc_attr( $this->yts_fab_options['yaz_0']) : ''
+			isset( $this->yts_fab_options['yaz_0'] ) ? esc_attr( $this->yts_fab_options['yaz_0']) : 'Help'
 		);
 	}
 
 	public function konum_1_callback() {
 		?> <select name="yts_fab_option_name[konum_1]" id="konum_1">
-			<?php $selected = (isset( $this->yts_fab_options['konum_1'] ) && $this->yts_fab_options['konum_1'] === 'right') ? 'selected' : 'Help' ; ?>
-			<option value="right" <?php echo $selected; ?>>Sağ</option>
-			<?php $selected = (isset( $this->yts_fab_options['konum_1'] ) && $this->yts_fab_options['konum_1'] === 'left') ? 'selected' : ' ' ; ?>
-			<option value="left" <?php echo $selected; ?>>Sol</option>
+			<?php $selected = (isset( $this->yts_fab_options['konum_1'] ) && $this->yts_fab_options['konum_1'] === 'right') ? 'selected' : '' ; ?>
+			<option value="right" <?php echo $selected; ?>>Right</option>
+			<?php $selected = (isset( $this->yts_fab_options['konum_1'] ) && $this->yts_fab_options['konum_1'] === 'left') ? 'selected' : '' ; ?>
+			<option value="left" <?php echo $selected; ?>>Left</option>
 		</select> <?php
 	}
 
@@ -215,6 +280,41 @@ class Yts_Fab_Admin {
 		printf(
 			'<textarea class="large-text" rows="2" name="yts_fab_option_name[link_2]" id="link_2">%s</textarea>',
 			isset( $this->yts_fab_options['link_2'] ) ? esc_attr( $this->yts_fab_options['link_2']) : ''
+		);
+	}
+
+	
+	public function media_selector_3_callback() {
+		wp_enqueue_media();
+		?>
+        <div class='image-preview-wrapper'>
+            <img id='image-preview' src='<?php $image_id = $this->yts_fab_options['media_selector_3']; echo isset( $image_id ) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : '' ; ?>' width='200'>
+        </div>
+        <input id="upload_image_button" type="button" class="button" value="Select image" >
+        <input type='hidden' name='yts_fab_option_name[media_selector_3]' value=" <?php echo isset( $this->yts_fab_options['media_selector_3'] ) ? esc_attr( $this->yts_fab_options['media_selector_3'] ) : '' ; ?> " id='media_selector_3'  >
+		<?php
+	}
+
+	public function width_4_callback() {
+		printf(
+			'<input type="text" name="yts_fab_option_name[width_4]" id="width_4" value="%s">',
+			isset( $this->yts_fab_options['width_4'] ) ? esc_attr( $this->yts_fab_options['width_4']) : '50'
+		);
+	}
+
+	public function height_5_callback() {
+		printf(
+			'<input type="text" name="yts_fab_option_name[height_5]" id="height_5" value="%s">',
+			isset( $this->yts_fab_options['height_5'] ) ? esc_attr( $this->yts_fab_options['height_5']) : '50'
+		);
+	}
+
+	//Advanced settings
+
+	public function border_radius_0_callback() {
+		printf(
+			'<input type="text" name="yts_fab_option_name[border_radius_0]" id="border_radius_0" value="%s">',
+			isset( $this->yts_fab_options['border_radius_0'] ) ? esc_attr( $this->yts_fab_options['border_radius_0']) : '10'
 		);
 	}
 
