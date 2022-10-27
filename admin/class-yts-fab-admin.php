@@ -103,7 +103,6 @@ class Yts_Fab_Admin {
 			false
 		);
 		$saved_attachment_post_id = get_option( 'media_selector_attachment_id', 0 );
-		wp_localize_script( 'yts-fab-admin-script', 'scriptParams', array('saved_attachment_post_id' => $saved_attachment_post_id) );
 		wp_enqueue_script( 'yts-fab-admin-script' );
 	}
 
@@ -286,15 +285,18 @@ class Yts_Fab_Admin {
 	
 	public function media_selector_3_callback() {
 		wp_enqueue_media();
+		$image_url;
+		$image_id = isset($this->yts_fab_options['media_selector_3']) ? isset($this->yts_fab_options['media_selector_3']) : "";
 		?>
         <div class='image-preview-wrapper'>
-            <img id='image-preview' src='<?php $image_id = $this->yts_fab_options['media_selector_3']; echo isset( $image_id ) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : '' ; ?>' width='200'>
+            <img id='image-preview' src='<?php echo  $image_id != "" && $image_id != NULL && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : plugin_dir_url( __FILE__ ) . 'placeholder.png' ; ?>' width='200'>
         </div>
-        <input id="upload_image_button" type="button" class="button" value="Select image" >
+        <input id="upload_image_button" type="button" class="button" value="<?php  _e('Select image', 'yts_fab')  ?>" >
         <input type='hidden' name='yts_fab_option_name[media_selector_3]' value=" <?php echo isset( $this->yts_fab_options['media_selector_3'] ) ? esc_attr( $this->yts_fab_options['media_selector_3'] ) : '' ; ?> " id='media_selector_3'  >
 		<?php
 	}
-
+	
+	
 	public function width_4_callback() {
 		printf(
 			'<input type="text" name="yts_fab_option_name[width_4]" id="width_4" value="%s">',

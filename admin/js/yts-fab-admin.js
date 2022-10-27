@@ -57,18 +57,19 @@
                         sizes: attachment.attributes.sizes,
                     });
                 });
-				
-				document.getElementById('media_selector_3').value = files[0]['id'];
-                document.getElementById('image-preview').src = files[0]['url'];
-				console.log(files[0]['url'])
+
+                if (files[0]['url'] != undefined ) {
+                    document.getElementById('media_selector_3').value = files[0]['id'];
+                    document.getElementById('image-preview').src = files[0]['url'];
+                }
 
                 callback(files);
             });
 
             image_frame.open();
         }
-		jQuery('#upload_image_button').on('click', function( event ){  wpOpenGallery(null, function(data) {
-			console.log(data);
+		jQuery('#upload_image_button').on('click', function( event ){  wpOpenGallery(null, function() {
+
 		}); });
     })
 }(jQuery));
