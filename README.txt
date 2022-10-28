@@ -43,5 +43,3 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 [WordPress](http://wordpress.org).
 [markdown syntax]: http://daringfireball.net/projects/markdown/syntax.
-
-`<?php code(); // goes in backticks ?>`
