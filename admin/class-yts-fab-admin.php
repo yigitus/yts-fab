@@ -286,7 +286,7 @@ class Yts_Fab_Admin {
 	public function media_selector_3_callback() {
 		wp_enqueue_media();
 		$image_url;
-		$image_id = isset($this->yts_fab_options['media_selector_3']) ? isset($this->yts_fab_options['media_selector_3']) : "";
+		$image_id = isset($this->yts_fab_options['media_selector_3']) ? $this->yts_fab_options['media_selector_3'] : "";
 		?>
         <div class='image-preview-wrapper'>
             <img id='image-preview' src='<?php echo  $image_id != "" && $image_id != NULL && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : plugin_dir_url( __FILE__ ) . 'placeholder.png' ; ?>' width='200'>
