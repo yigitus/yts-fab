@@ -120,29 +120,33 @@ class Yts_Fab_Public {
 			$width = $yts_fab_options['width_4'];
 			$height = $yts_fab_options['height_5'];
 			$border_radius = $yts_fab_options['border_radius_0'];
+			$isActive_6 = $yts_fab_options['isActive_6'];
 		}
-		echo '<a href="' . $link_2 . '" class="ytsfab-' . $konum_1 .'" id="yts_fab"><div id="yts_fab_text">' . $yaz_0 . '</div><img style="width: ' . $width . 'px; height: ' . $height . 'px; border-radius: ' . $border_radius . 'px;" src="' . $image_url . '";></a>';
-		echo '<script>function docReady(fn) {
-			if (document.readyState === "complete" || document.readyState === "interactive") {
-				setTimeout(fn, 1);
-			} else {
-				document.addEventListener("DOMContentLoaded", fn);
+
+		if( $isActive_6 == "active" ) {
+			echo '<a href="' . $link_2 . '" class="ytsfab-' . $konum_1 .'" id="yts_fab"><div id="yts_fab_text">' . $yaz_0 . '</div><img style="width: ' . $width . 'px; height: ' . $height . 'px; border-radius: ' . $border_radius . 'px;" src="' . $image_url . '";></a>';
+			echo '<script>function docReady(fn) {
+				if (document.readyState === "complete" || document.readyState === "interactive") {
+					setTimeout(fn, 1);
+				} else {
+					document.addEventListener("DOMContentLoaded", fn);
+				}
 			}
+			
+			docReady(() => {
+				document.querySelector("#yts_fab").addEventListener("mouseover", () => {
+					document.querySelector("#yts_fab_text").style.opacity = "100";
+					document.querySelector("#yts_fab_text").style.display = "unset";
+			
+				});
+			
+				document.querySelector("#yts_fab").addEventListener("mouseleave", () => {
+					document.querySelector("#yts_fab_text").style.opacity = "0";
+					document.querySelector("#yts_fab_text").style.display = "none";
+			
+				});
+			});</script>';
 		}
-		
-		docReady(() => {
-			document.querySelector("#yts_fab").addEventListener("mouseover", () => {
-				document.querySelector("#yts_fab_text").style.opacity = "100";
-				document.querySelector("#yts_fab_text").style.display = "unset";
-		
-			});
-		
-			document.querySelector("#yts_fab").addEventListener("mouseleave", () => {
-				document.querySelector("#yts_fab_text").style.opacity = "0";
-				document.querySelector("#yts_fab_text").style.display = "none";
-		
-			});
-		});</script>';
 	}
 
 }

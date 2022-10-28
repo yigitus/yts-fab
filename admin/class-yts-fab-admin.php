@@ -164,6 +164,14 @@ class Yts_Fab_Admin {
 		);
 
 		add_settings_field(
+			'isActive_6', // id
+			'Active', // title
+			array( $this, 'isActive_6_callback' ), // callback
+			'yts-fab-admin', // page
+			'yts_fab_setting_section' // section
+		);
+		
+		add_settings_field(
 			'yaz_0', // id
 			'Text', // title
 			array( $this, 'yaz_0_callback' ), // callback
@@ -229,7 +237,7 @@ class Yts_Fab_Admin {
 		}
 
 		if ( isset( $input['konum_1'] ) ) {
-			$sanitary_values['konum_1'] = $input['konum_1'];
+			$sanitary_values['konum_1'] = esc_textarea( $input['konum_1'] );
 		}
 
 		if ( isset( $input['link_2'] ) ) {
@@ -250,6 +258,10 @@ class Yts_Fab_Admin {
 
 		if ( isset( $input['border_radius_0'] ) ) {
 			$sanitary_values['border_radius_0'] = esc_textarea( $input['border_radius_0'] );
+		}
+
+		if ( isset( $input['isActive_6'] ) ) {
+			$sanitary_values['isActive_6'] = esc_textarea( $input['isActive_6'] );
 		}
 
 		return $sanitary_values;
@@ -309,6 +321,12 @@ class Yts_Fab_Admin {
 			'<input type="text" name="yts_fab_option_name[height_5]" id="height_5" value="%s">',
 			isset( $this->yts_fab_options['height_5'] ) ? esc_attr( $this->yts_fab_options['height_5']) : '50'
 		);
+	}
+
+	public function isActive_6_callback() {
+		?> 
+		 <input type="checkbox" id="isActive_6" name="yts_fab_option_name[isActive_6]" value="active" <?php echo isset( $this->yts_fab_options['isActive_6'] ) && $this->yts_fab_options['isActive_6'] == "active" ? "checked" : "" ;  ?> />
+		<?php 
 	}
 
 	//Advanced settings
