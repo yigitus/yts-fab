@@ -102,29 +102,19 @@ class Yts_Fab_Public {
 	
 	public function yts_register_code_on_body() {
 		$yts_fab_options = get_option( 'yts_fab_option_name' );
-		if ($yts_fab_options == false) {
-			$yaz_0 = 'Help';
-			$konum_1 = 'right';
-			$link_2 = '';
-			$width = '50';
-			$height = '50';
-			$border_radius = '10';
-			$image_url = plugin_dir_url( __FILE__ ) . 'placeholder.png';
-			
-		} else {
-			$yaz_0 = $yts_fab_options['yaz_0'];
-			$konum_1 = $yts_fab_options['konum_1'];
-			$link_2 = $yts_fab_options['link_2'];
-			$image_id = $yts_fab_options['media_selector_3'];
-			$image_url =  wp_get_attachment_image_src($image_id)[0];
-			$width = $yts_fab_options['width_4'];
-			$height = $yts_fab_options['height_5'];
-			$border_radius = $yts_fab_options['border_radius_0'];
-			$isActive_6 = $yts_fab_options['isActive_6'];
-		}
 
-		if( $isActive_6 == "active" ) {
-			echo '<a href="' . $link_2 . '" class="ytsfab-' . $konum_1 .'" id="yts_fab"><div id="yts_fab_text">' . $yaz_0 . '</div><img style="width: ' . $width . 'px; height: ' . $height . 'px; border-radius: ' . $border_radius . 'px;" src="' . $image_url . '";></a>';
+		$text = isset($yts_fab_options['text_1']) ? $yts_fab_options['text_1']  : "Help";
+		$position = isset($yts_fab_options['position_2']) ? $yts_fab_options['position_2']  : "right";
+		$link = isset($yts_fab_options['url_3']) ? $yts_fab_options['url_3']  : "";
+		$image_id = isset($yts_fab_options['image_id_4']) ? $yts_fab_options['image_id_4']  : "";
+		$width = isset($yts_fab_options['width_5']) ? $yts_fab_options['width_5']  : "50";
+		$height = isset($yts_fab_options['height_6']) ? $yts_fab_options['height_6']  : "50";
+		$border_radius = isset($yts_fab_options['border_radius_0']) ? $yts_fab_options['border_radius_0']  : "5";
+		$isActive = isset($yts_fab_options['isActive_0']) ? $yts_fab_options['isActive_0']  : "";
+		$image_url = $image_id != "" ? wp_get_attachment_image_src($image_id)[0]  : plugin_dir_url( __FILE__ ) . 'placeholder.png';
+
+		if( $isActive == "active" ) {
+			echo '<a href="' . $link . '" class="ytsfab-' . $position .'" id="yts_fab"><div id="yts_fab_text">' . $text . '</div><img style="width: ' . $width . 'px; height: ' . $height . 'px; border-radius: ' . $border_radius . 'px;" src="' . $image_url . '";></a>';
 			echo '<script>function docReady(fn) {
 				if (document.readyState === "complete" || document.readyState === "interactive") {
 					setTimeout(fn, 1);
@@ -148,5 +138,4 @@ class Yts_Fab_Public {
 			});</script>';
 		}
 	}
-
 }

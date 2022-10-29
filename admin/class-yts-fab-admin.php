@@ -164,57 +164,57 @@ class Yts_Fab_Admin {
 		);
 
 		add_settings_field(
-			'isActive_6', // id
+			'isActive_0', // id
 			'Active', // title
-			array( $this, 'isActive_6_callback' ), // callback
+			array( $this, 'isActive_0_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
 		
 		add_settings_field(
-			'yaz_0', // id
+			'text_1', // id
 			'Text', // title
-			array( $this, 'yaz_0_callback' ), // callback
+			array( $this, 'text_1_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
 
 		add_settings_field(
-			'konum_1', // id
+			'position_2', // id
 			'Location', // title
-			array( $this, 'konum_1_callback' ), // callback
+			array( $this, 'position_2_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
 
 		add_settings_field(
-			'link_2', // id
+			'url_3', // id
 			'Link', // title
-			array( $this, 'link_2_callback' ), // callback
+			array( $this, 'url_3_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
 
 		add_settings_field(
-			'media_selector_3', // id
+			'image_id_4', // id
 			'Image', // title
-			array( $this, 'media_selector_3_callback' ), // callback
+			array( $this, 'image_id_4_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
 
 		add_settings_field(
-			'width_4', // id
+			'width_5', // id
 			'Width', // title
-			array( $this, 'width_4_callback' ), // callback
+			array( $this, 'width_5_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
 
 		add_settings_field(
-			'height_5', // id
+			'height_6', // id
 			'Height', // title
-			array( $this, 'height_5_callback' ), // callback
+			array( $this, 'height_6_callback' ), // callback
 			'yts-fab-admin', // page
 			'yts_fab_setting_section' // section
 		);
@@ -232,36 +232,36 @@ class Yts_Fab_Admin {
 
 	public function yts_fab_sanitize($input) {
 		$sanitary_values = array();
-		if ( isset( $input['yaz_0'] ) ) {
-			$sanitary_values['yaz_0'] = esc_textarea( $input['yaz_0'] );
+		if ( isset( $input['text_1'] ) ) {
+			$sanitary_values['text_1'] = esc_attr( $input['text_1'] );
 		}
 
-		if ( isset( $input['konum_1'] ) ) {
-			$sanitary_values['konum_1'] = esc_textarea( $input['konum_1'] );
+		if ( isset( $input['position_2'] ) ) {
+			$sanitary_values['position_2'] = esc_attr( $input['position_2'] );
 		}
 
-		if ( isset( $input['link_2'] ) ) {
-			$sanitary_values['link_2'] = esc_textarea( $input['link_2'] );
+		if ( isset( $input['url_3'] ) ) {
+			$sanitary_values['url_3'] = esc_url( $input['url_3'] );
 		}
 
-		if ( isset( $input['media_selector_3'] ) ) {
-			$sanitary_values['media_selector_3'] = esc_textarea( $input['media_selector_3'] );
+		if ( isset( $input['image_id_4'] ) ) {
+			$sanitary_values['image_id_4'] = esc_attr( $input['image_id_4'] );
 		}
 
-		if ( isset( $input['width_4'] ) ) {
-			$sanitary_values['width_4'] = esc_textarea( $input['width_4'] );
+		if ( isset( $input['width_5'] ) ) {
+			$sanitary_values['width_5'] = esc_attr( $input['width_5'] );
 		}
 
-		if ( isset( $input['height_5'] ) ) {
-			$sanitary_values['height_5'] = esc_textarea( $input['height_5'] );
+		if ( isset( $input['height_6'] ) ) {
+			$sanitary_values['height_6'] = esc_attr( $input['height_6'] );
 		}
 
 		if ( isset( $input['border_radius_0'] ) ) {
-			$sanitary_values['border_radius_0'] = esc_textarea( $input['border_radius_0'] );
+			$sanitary_values['border_radius_0'] = esc_attr( $input['border_radius_0'] );
 		}
 
-		if ( isset( $input['isActive_6'] ) ) {
-			$sanitary_values['isActive_6'] = esc_textarea( $input['isActive_6'] );
+		if ( isset( $input['isActive_0'] ) ) {
+			$sanitary_values['isActive_0'] = esc_attr( $input['isActive_0'] );
 		}
 
 		return $sanitary_values;
@@ -271,61 +271,61 @@ class Yts_Fab_Admin {
 		
 	}
 
-	public function yaz_0_callback() {
+	public function text_1_callback() {
 		printf(
-			'<textarea class="large-text" rows="5" name="yts_fab_option_name[yaz_0]" id="yaz_0">%s</textarea>',
-			isset( $this->yts_fab_options['yaz_0'] ) ? esc_attr( $this->yts_fab_options['yaz_0']) : 'Help'
+			'<textarea class="large-text" rows="5" name="yts_fab_option_name[text_1]" id="text_1">%s</textarea>',
+			isset( $this->yts_fab_options['text_1'] ) ? esc_attr( $this->yts_fab_options['text_1']) : 'Help'
 		);
 	}
 
-	public function konum_1_callback() {
-		?> <select name="yts_fab_option_name[konum_1]" id="konum_1">
-			<?php $selected = (isset( $this->yts_fab_options['konum_1'] ) && $this->yts_fab_options['konum_1'] === 'right') ? 'selected' : '' ; ?>
+	public function position_2_callback() {
+		?> <select name="yts_fab_option_name[position_2]" id="position_2">
+			<?php $selected = (isset( $this->yts_fab_options['position_2'] ) && $this->yts_fab_options['position_2'] === 'right') ? 'selected' : '' ; ?>
 			<option value="right" <?php echo $selected; ?>>Right</option>
-			<?php $selected = (isset( $this->yts_fab_options['konum_1'] ) && $this->yts_fab_options['konum_1'] === 'left') ? 'selected' : '' ; ?>
+			<?php $selected = (isset( $this->yts_fab_options['position_2'] ) && $this->yts_fab_options['position_2'] === 'left') ? 'selected' : '' ; ?>
 			<option value="left" <?php echo $selected; ?>>Left</option>
 		</select> <?php
 	}
 
-	public function link_2_callback() {
+	public function url_3_callback() {
 		printf(
-			'<textarea class="large-text" rows="2" name="yts_fab_option_name[link_2]" id="link_2">%s</textarea>',
-			isset( $this->yts_fab_options['link_2'] ) ? esc_attr( $this->yts_fab_options['link_2']) : ''
+			'<textarea class="large-text" rows="2" name="yts_fab_option_name[url_3]" id="url_3">%s</textarea>',
+			isset( $this->yts_fab_options['url_3'] ) ? esc_attr( $this->yts_fab_options['url_3']) : ''
 		);
 	}
 
 	
-	public function media_selector_3_callback() {
+	public function image_id_4_callback() {
 		wp_enqueue_media();
 		$image_url;
-		$image_id = isset($this->yts_fab_options['media_selector_3']) ? $this->yts_fab_options['media_selector_3'] : "";
+		$image_id = isset($this->yts_fab_options['image_id_4']) ? $this->yts_fab_options['image_id_4'] : "";
 		?>
         <div class='image-preview-wrapper'>
             <img id='image-preview' src='<?php echo  $image_id != "" && $image_id != NULL && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : plugin_dir_url( __FILE__ ) . 'placeholder.png' ; ?>' width='200'>
         </div>
         <input id="upload_image_button" type="button" class="button" value="<?php  _e('Select image', 'yts_fab')  ?>" >
-        <input type='hidden' name='yts_fab_option_name[media_selector_3]' value=" <?php echo isset( $this->yts_fab_options['media_selector_3'] ) ? esc_attr( $this->yts_fab_options['media_selector_3'] ) : '' ; ?> " id='media_selector_3'  >
+        <input type='hidden' name='yts_fab_option_name[image_id_4]' value=" <?php echo isset( $this->yts_fab_options['image_id_4'] ) ? esc_attr( $this->yts_fab_options['image_id_4'] ) : '' ; ?> " id='image_id_4'  >
 		<?php
 	}
 	
 	
-	public function width_4_callback() {
+	public function width_5_callback() {
 		printf(
-			'<input type="text" name="yts_fab_option_name[width_4]" id="width_4" value="%s">',
-			isset( $this->yts_fab_options['width_4'] ) ? esc_attr( $this->yts_fab_options['width_4']) : '50'
+			'<input type="text" name="yts_fab_option_name[width_5]" id="width_5" value="%s">',
+			isset( $this->yts_fab_options['width_5'] ) ? esc_attr( $this->yts_fab_options['width_5']) : '50'
 		);
 	}
 
-	public function height_5_callback() {
+	public function height_6_callback() {
 		printf(
-			'<input type="text" name="yts_fab_option_name[height_5]" id="height_5" value="%s">',
-			isset( $this->yts_fab_options['height_5'] ) ? esc_attr( $this->yts_fab_options['height_5']) : '50'
+			'<input type="text" name="yts_fab_option_name[height_6]" id="height_6" value="%s">',
+			isset( $this->yts_fab_options['height_6'] ) ? esc_attr( $this->yts_fab_options['height_6']) : '50'
 		);
 	}
 
-	public function isActive_6_callback() {
+	public function isActive_0_callback() {
 		?> 
-		 <input type="checkbox" id="isActive_6" name="yts_fab_option_name[isActive_6]" value="active" <?php echo isset( $this->yts_fab_options['isActive_6'] ) && $this->yts_fab_options['isActive_6'] == "active" ? "checked" : "" ;  ?> />
+		 <input type="checkbox" id="isActive_0" name="yts_fab_option_name[isActive_0]" value="active" <?php echo isset( $this->yts_fab_options['isActive_0'] ) && $this->yts_fab_options['isActive_0'] == "active" ? "checked" : "" ;  ?> />
 		<?php 
 	}
 

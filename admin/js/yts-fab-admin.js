@@ -59,7 +59,7 @@
                 });
 
                 if (files[0]['url'] != undefined ) {
-                    document.getElementById('media_selector_3').value = files[0]['id'];
+                    document.getElementById('image_id_4').value = files[0]['id'];
                     document.getElementById('image-preview').src = files[0]['url'];
                 }
 
