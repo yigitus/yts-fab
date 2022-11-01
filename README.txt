@@ -23,8 +23,6 @@ OR
 1. Get the plugin from wordpress plugins menu
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Screenshots ==
-
 == Changelog ==
 
 = 1.0.5 =
