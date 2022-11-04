@@ -301,7 +301,7 @@ class Yts_Fab_Admin {
 		$image_id = isset($this->yts_fab_options['image_id_4']) ? $this->yts_fab_options['image_id_4'] : "";
 		?>
         <div class='image-preview-wrapper'>
-            <img id='image-preview' src='<?php echo  $image_id != "" && $image_id != NULL && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : plugin_dir_url( __FILE__ ) . 'placeholder.png' ; ?>' width='200'>
+            <img id='image-preview' src='<?php echo  $image_id != "" && $image_id != NULL && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : esc_url(plugin_dir_url( __FILE__ ) . 'placeholder.png') ; ?>' width='200'>
         </div>
         <input id="upload_image_button" type="button" class="button" value="<?php  _e('Select image', 'yts_fab')  ?>" >
         <input type='hidden' name='yts_fab_option_name[image_id_4]' value=" <?php echo isset( $this->yts_fab_options['image_id_4'] ) ? esc_attr( $this->yts_fab_options['image_id_4'] ) : '' ; ?> " id='image_id_4'  >

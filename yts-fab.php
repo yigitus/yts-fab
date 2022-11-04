@@ -3,14 +3,14 @@
 /**
  *
  * @link              https://www.github.com/yigitus/
- * @since             1.0.0
+ * @since             1.0.5
  * @package           Yts_Fab
  *
  * @wordpress-plugin
  * Plugin Name:       YTS Floating action button
  * Plugin URI:        https://www.github.com/yigitus/yts-fab
  * Description:       This plugin adds a floating action to your website.
- * Version:           1.0.0
+ * Version:           1.0.5
  * Author:            yigitus
  * Author URI:        https://www.github.com/yigitus/
  * License:           GPL-2.0+

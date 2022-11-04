@@ -114,7 +114,7 @@ class Yts_Fab_Public {
 		$image_url = $image_id != "" ? wp_get_attachment_image_src($image_id)[0]  : plugin_dir_url( __FILE__ ) . 'placeholder.png';
 
 		if( $isActive == "active" ) {
-			echo '<a href="' . $link . '" class="ytsfab-' . $position .'" id="yts_fab"><div id="yts_fab_text">' . $text . '</div><img style="width: ' . $width . 'px; height: ' . $height . 'px; border-radius: ' . $border_radius . 'px;" src="' . $image_url . '";></a>';
+			echo '<a href="' . esc_attr($link) . '" class="ytsfab-' . esc_attr($position) .'" id="yts_fab"><div id="yts_fab_text">' . esc_attr($text) . '</div><img style="width: ' . esc_attr($width) . 'px; height: ' . esc_attr($height) . 'px; border-radius: ' . esc_attr($border_radius) . 'px;" src="' . esc_attr($image_url) . '";></a>';
 			echo '<script>function docReady(fn) {
 				if (document.readyState === "complete" || document.readyState === "interactive") {
 					setTimeout(fn, 1);
