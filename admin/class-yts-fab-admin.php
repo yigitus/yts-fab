@@ -124,7 +124,7 @@ class Yts_Fab_Admin {
 	}
 
 	public function yts_create_admin_page() {
-		$this->yts_fab_options = get_option( 'yts_fab_option_name' ); ?>
+		 ?>
 
 		<div class="wrap">
 			<h2>YTS Floating action button</h2>
@@ -143,6 +143,17 @@ class Yts_Fab_Admin {
 	<?php }
 
 	public function yts_page_init() {
+		$defaults = array(
+			'isActive_0' => 'false',
+			'text_1' => 'Help',
+			'position_2' => 'right',
+			'url_3' => '',
+			'image_id_4' => '',
+			'width_5' => '50',
+			'height_6' => '50',
+			'border_radius_0' => '5'
+		  );
+		  $this->yts_fab_options = wp_parse_args(get_option('yts_fab_option_name'), $defaults);
 		register_setting(
 			'yts_fab_option_group', // option_group
 			'yts_fab_option_name', // option_name
@@ -274,15 +285,15 @@ class Yts_Fab_Admin {
 	public function text_1_callback() {
 		printf(
 			'<textarea class="large-text" rows="5" name="yts_fab_option_name[text_1]" id="text_1">%s</textarea>',
-			isset( $this->yts_fab_options['text_1'] ) ? esc_attr( $this->yts_fab_options['text_1']) : 'Help'
+			esc_attr( $this->yts_fab_options['text_1'])
 		);
 	}
 
 	public function position_2_callback() {
 		?> <select name="yts_fab_option_name[position_2]" id="position_2">
-			<?php $selected = (isset( $this->yts_fab_options['position_2'] ) && $this->yts_fab_options['position_2'] === 'right') ? 'selected' : '' ; ?>
+			<?php $selected = ($this->yts_fab_options['position_2'] === 'right') ? 'selected' : '' ; ?>
 			<option value="right" <?php echo $selected; ?>>Right</option>
-			<?php $selected = (isset( $this->yts_fab_options['position_2'] ) && $this->yts_fab_options['position_2'] === 'left') ? 'selected' : '' ; ?>
+			<?php $selected = ($this->yts_fab_options['position_2'] === 'left') ? 'selected' : '' ; ?>
 			<option value="left" <?php echo $selected; ?>>Left</option>
 		</select> <?php
 	}
@@ -290,21 +301,20 @@ class Yts_Fab_Admin {
 	public function url_3_callback() {
 		printf(
 			'<textarea class="large-text" rows="2" name="yts_fab_option_name[url_3]" id="url_3">%s</textarea>',
-			isset( $this->yts_fab_options['url_3'] ) ? esc_attr( $this->yts_fab_options['url_3']) : ''
+			esc_attr( $this->yts_fab_options['url_3'])
 		);
 	}
 
 	
 	public function image_id_4_callback() {
 		wp_enqueue_media();
-		$image_url;
 		$image_id = isset($this->yts_fab_options['image_id_4']) ? $this->yts_fab_options['image_id_4'] : "";
 		?>
         <div class='image-preview-wrapper'>
-            <img id='image-preview' src='<?php echo  $image_id != "" && $image_id != NULL && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : esc_url(plugin_dir_url( __FILE__ ) . 'placeholder.png') ; ?>' width='200'>
+            <img id='image-preview' src='<?php echo  $image_id != "" && isset($image_id) ? esc_attr( wp_get_attachment_image_src($image_id)[0]) : esc_url(plugin_dir_url( __FILE__ ) . 'placeholder.png') ; ?>' width='200'>
         </div>
         <input id="upload_image_button" type="button" class="button" value="<?php  _e('Select image', 'yts_fab')  ?>" >
-        <input type='hidden' name='yts_fab_option_name[image_id_4]' value=" <?php echo isset( $this->yts_fab_options['image_id_4'] ) ? esc_attr( $this->yts_fab_options['image_id_4'] ) : '' ; ?> " id='image_id_4'  >
+        <input type='hidden' name='yts_fab_option_name[image_id_4]' value="<?php echo isset( $this->yts_fab_options['image_id_4'] ) ? esc_attr( $this->yts_fab_options['image_id_4'] ) : '' ; ?>" id='image_id_4'  >
 		<?php
 	}
 	
@@ -312,21 +322,21 @@ class Yts_Fab_Admin {
 	public function width_5_callback() {
 		printf(
 			'<input type="text" name="yts_fab_option_name[width_5]" id="width_5" value="%s">',
-			isset( $this->yts_fab_options['width_5'] ) ? esc_attr( $this->yts_fab_options['width_5']) : '50'
+			esc_attr( $this->yts_fab_options['width_5'])
 		);
 	}
 
 	public function height_6_callback() {
 		printf(
 			'<input type="text" name="yts_fab_option_name[height_6]" id="height_6" value="%s">',
-			isset( $this->yts_fab_options['height_6'] ) ? esc_attr( $this->yts_fab_options['height_6']) : '50'
+			esc_attr( $this->yts_fab_options['height_6'])
 		);
 	}
 
 	public function isActive_0_callback() {
 		?> 
-		 <input type="checkbox" id="isActive_0" name="yts_fab_option_name[isActive_0]" value="active" <?php echo isset( $this->yts_fab_options['isActive_0'] ) && $this->yts_fab_options['isActive_0'] == "active" ? "checked" : "" ;  ?> />
-		<?php 
+		 <input type="checkbox" id="isActive_0" name="yts_fab_option_name[isActive_0]" value="true" <?php echo $this->yts_fab_options['isActive_0'] == "true" ? "checked" : "" ;?> />
+		<?php
 	}
 
 	//Advanced settings
@@ -334,7 +344,7 @@ class Yts_Fab_Admin {
 	public function border_radius_0_callback() {
 		printf(
 			'<input type="text" name="yts_fab_option_name[border_radius_0]" id="border_radius_0" value="%s">',
-			isset( $this->yts_fab_options['border_radius_0'] ) ? esc_attr( $this->yts_fab_options['border_radius_0']) : '10'
+			esc_attr( $this->yts_fab_options['border_radius_0'])
 		);
 	}
 

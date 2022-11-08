@@ -102,18 +102,17 @@ class Yts_Fab_Public {
 	
 	public function yts_register_code_on_body() {
 		$yts_fab_options = get_option( 'yts_fab_option_name' );
-
-		$text = isset($yts_fab_options['text_1']) ? $yts_fab_options['text_1']  : "Help";
-		$position = isset($yts_fab_options['position_2']) ? $yts_fab_options['position_2']  : "right";
-		$link = isset($yts_fab_options['url_3']) ? $yts_fab_options['url_3']  : "";
-		$image_id = isset($yts_fab_options['image_id_4']) ? $yts_fab_options['image_id_4']  : "";
-		$width = isset($yts_fab_options['width_5']) ? $yts_fab_options['width_5']  : "50";
-		$height = isset($yts_fab_options['height_6']) ? $yts_fab_options['height_6']  : "50";
-		$border_radius = isset($yts_fab_options['border_radius_0']) ? $yts_fab_options['border_radius_0']  : "5";
-		$isActive = isset($yts_fab_options['isActive_0']) ? $yts_fab_options['isActive_0']  : "";
+		$text = $yts_fab_options['text_1'];
+		$position = $yts_fab_options['position_2'];
+		$link = $yts_fab_options['url_3'];
+		$image_id = $yts_fab_options['image_id_4'];
+		$width = $yts_fab_options['width_5'];
+		$height = $yts_fab_options['height_6'];
+		$border_radius = $yts_fab_options['border_radius_0'];
+		$isActive = $yts_fab_options['isActive_0'];
 		$image_url = $image_id != "" ? wp_get_attachment_image_src($image_id)[0]  : plugin_dir_url( __FILE__ ) . 'placeholder.png';
 
-		if( $isActive == "active" ) {
+		if( $isActive == "true" ) {
 			echo '<a href="' . esc_attr($link) . '" class="ytsfab-' . esc_attr($position) .'" id="yts_fab"><div id="yts_fab_text">' . esc_attr($text) . '</div><img style="width: ' . esc_attr($width) . 'px; height: ' . esc_attr($height) . 'px; border-radius: ' . esc_attr($border_radius) . 'px;" src="' . esc_attr($image_url) . '";></a>';
 			echo '<script>function docReady(fn) {
 				if (document.readyState === "complete" || document.readyState === "interactive") {

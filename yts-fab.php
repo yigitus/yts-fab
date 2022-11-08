@@ -10,7 +10,7 @@
  * Plugin Name:       YTS Floating action button
  * Plugin URI:        https://www.github.com/yigitus/yts-fab
  * Description:       This plugin adds a floating action to your website.
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            yigitus
  * Author URI:        https://www.github.com/yigitus/
  * License:           GPL-2.0+
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'YTS_FAB_VERSION', '1.0.5' );
+define( 'YTS_FAB_VERSION', '1.0.6' );
 
 /**
  * The code that runs during plugin activation.

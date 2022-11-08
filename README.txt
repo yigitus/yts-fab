@@ -1,9 +1,9 @@
 === YTS Floating action button ===
 Contributors: https://github.com/yigitus/
-Tags: comments, spam
+Tags: whatsapp button, floating action button, fab, action button
 Requires at least: 3.0.1
 Tested up to: 6.1
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,11 +25,15 @@ OR
 
 == Changelog ==
 
+= 1.0.6 =
+* Minor bug-fixes for CSS and placeholder image.
+* Optimization improved.
+
 = 1.0.5 =
-* Added placeholder image
+* Added placeholder image.
 
 = 0.5 =
-* Added right/left option
+* Added right/left option.
 
 = 0.5 =
 * List versions from most recent at top to oldest at bottom.
